@@ -32,8 +32,14 @@ public class BookService {
     }
 
     public void setBookPriceWithDiscount(Book book) {
-        book.setPrice(book.getPrice().subtract(
-                book.getPrice().multiply(new BigDecimal(discountService.getDiscountById(book.getDiscountGroupId()))).divide(new BigDecimal(100),
-                        RoundingMode.DOWN)));
+        BigDecimal oldPrice = book.getPrice();
+        try {
+            book.setPrice(book.getPrice().subtract(
+                    book.getPrice().multiply(new BigDecimal(discountService.getDiscountById(book.getDiscountGroupId()))).divide(new BigDecimal(100),
+                            RoundingMode.DOWN)));
+        } catch (Exception e){
+            book.setPrice(oldPrice);
+            log.info("Discount service exception caused by: {}",  e.getClass().getName());
+        }
     }
 }
