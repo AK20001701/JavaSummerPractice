@@ -1,22 +1,37 @@
 package ru.example.bookuser.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.example.bookuser.entity.User;
-import ru.example.bookuser.repository.UserRepository;
+import org.springframework.web.bind.annotation.*;
+import ru.example.bookuser.entity.Comment;
+import ru.example.bookuser.service.CommentService;
+import ru.example.bookuser.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 public class CommentController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final CommentService commentService;
+    private final UserService userService;
 
-    @GetMapping("/test")
-    List<User> getInt() {
-        return userRepository.findAll();
+    public CommentController(CommentService commentService, UserService userService) {
+        this.commentService = commentService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/book/{id}/comment")
+    public List<Comment> getCommentsForBookWithId (@PathVariable Long id){
+        return commentService.getCommentsForBookWithId(id);
+    }
+
+    @GetMapping("/book/comments")
+    public List<Comment> getAllComments (){
+        return commentService.getAllComments();
+    }
+
+    @PostMapping("/book/comment/add")
+    public void add (@RequestBody Comment comment, Principal principal){
+        commentService.addNewComment(comment, principal.getName());
     }
 
 }

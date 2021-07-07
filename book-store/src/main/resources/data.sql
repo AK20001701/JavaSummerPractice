@@ -9,18 +9,6 @@ CREATE TABLE book
     discount_group_id INT          NOT NULL
 );
 
-CREATE TABLE comment
-(
-    id        INT AUTO_INCREMENT PRIMARY KEY,
-    author_id INT          NOT NULL,
-    book_id   INT          NOT NULL,
-    text      VARCHAR(255) NOT NULL
-);
-
-INSERT INTO comment (id, author_id, book_id, text)
-VALUES (1, 1, 1, 'Nice book'),
-       (2, 1, 1, 'Not so bad'),
-       (3, 1, 1, 'Awesome');
 
 INSERT INTO book (id, author, title, price, discount_group_id)
 VALUES (1, 'Author 1', 'Book 1', 100, 1),

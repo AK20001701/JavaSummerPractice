@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Builder
 @Data
@@ -26,9 +25,4 @@ public class Book {
 
     @Column(name="discount_group_id")
     private Long discountGroupId;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "bookId")
-    private Set<Comment> comments;
-
-
 }

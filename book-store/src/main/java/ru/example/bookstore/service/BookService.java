@@ -1,16 +1,13 @@
 package ru.example.bookstore.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.example.bookstore.entity.Book;
-import ru.example.bookstore.entity.Comment;
 import ru.example.bookstore.repository.BookRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +16,6 @@ public class BookService {
     private final BookRepository bookRepository;
     private final DiscountService discountService;
 
-    @Autowired
     public BookService(BookRepository bookRepository, DiscountService discountService) {
         this.bookRepository = bookRepository;
         this.discountService = discountService;
@@ -33,10 +29,6 @@ public class BookService {
         Book book = bookRepository.getById(id);
         setBookPriceWithDiscount(book);
         return book;
-    }
-
-    public Set<Comment> getBookComments(Long id) {
-        return bookRepository.getById(id).getComments();
     }
 
     public void setBookPriceWithDiscount(Book book) {
