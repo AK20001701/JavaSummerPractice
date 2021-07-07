@@ -9,7 +9,6 @@ import ru.example.bookstore.entity.Comment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service

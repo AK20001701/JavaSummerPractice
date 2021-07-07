@@ -24,7 +24,4 @@ public class User {
     private String username;
 
     private String password;
-//
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authorId")
-//    private Set<Comment> comments;
 }

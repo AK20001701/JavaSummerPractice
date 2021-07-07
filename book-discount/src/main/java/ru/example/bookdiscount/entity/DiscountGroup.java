@@ -23,6 +23,4 @@ public class DiscountGroup {
     private Long id;
     private String title;
     private Integer discount;
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "discount_group_id")
-//    private Set<Book> books;
 }
