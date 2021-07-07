@@ -20,13 +20,13 @@ http://localhost:8080/book/1/comment
 
 ## Ссылки на документацию API в Swagger
 Bookstore
-http://localhost:8080/v2/api-docs
+http://localhost:8080/swagger-ui/
 
 Bookdiscount
-http://localhost:8081/v2/api-docs
+http://localhost:8081/swagger-ui/
 
 Bookuser
-http://localhost:8082/v2/api-docs
+http://localhost:8082/swagger-ui/
 
 
 
