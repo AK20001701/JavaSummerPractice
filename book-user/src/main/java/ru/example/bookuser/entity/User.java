@@ -1,7 +1,5 @@
-package ru.example.bookstore.entity;
+package ru.example.bookuser.entity;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,23 +7,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Set;
 
-@Builder
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Comment {
+@Table(name = "usr")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="author_id")
-    private Long authorId;
+    private String username;
 
-    @Column(name="book_id")
-    private Long bookId;
-
-    private String text;
+    private String password;
+//
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authorId")
+//    private Set<Comment> comments;
 }

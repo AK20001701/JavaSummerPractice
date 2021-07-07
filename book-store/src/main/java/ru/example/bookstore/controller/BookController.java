@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import ru.example.bookstore.entity.Book;
+import ru.example.bookstore.entity.Comment;
 import ru.example.bookstore.service.BookService;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @Slf4j
@@ -26,8 +28,14 @@ public class BookController {
     }
 
     @GetMapping("/book/{id}")
-    public String getBookById(@PathVariable Long id) {
+    public Book getBookById(@PathVariable Long id) {
         log.info("User requested book with id: {} ", id);
-        return "Book1";
+        return bookService.getBookById(id);
+    }
+
+    @GetMapping("/book/{id}/comments")
+    public Set<Comment> getBookComments(@PathVariable Long id) {
+        log.info("User requested book comments for book with id: {} ", id);
+        return bookService.getBookComments(id);
     }
 }

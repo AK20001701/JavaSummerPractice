@@ -1,5 +1,4 @@
-package ru.example.bookstore.entity;
-
+package ru.example.bookuser.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Builder
 @Data
 @Entity
 @AllArgsConstructor

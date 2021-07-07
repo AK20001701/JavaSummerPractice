@@ -4,11 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.example.bookstore.entity.Book;
+import ru.example.bookstore.entity.Comment;
 import ru.example.bookstore.repository.BookRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,11 +26,22 @@ public class BookService {
     }
 
     public List<Book> getBooks() {
-        Integer discount = discountService.getDiscount();
+        return bookRepository.findAll().stream().peek(this::setBookPriceWithDiscount).collect(Collectors.toList());
+    }
 
-        return bookRepository.findAll().stream().peek(book -> book.setPrice(book.getPrice().subtract(
-                book.getPrice().multiply(new BigDecimal(discount)).divide(new BigDecimal(100),
-                       RoundingMode.DOWN))))
-                .collect(Collectors.toList());
+    public Book getBookById(long id) {
+        Book book = bookRepository.getById(id);
+        setBookPriceWithDiscount(book);
+        return book;
+    }
+
+    public Set<Comment> getBookComments(Long id) {
+        return bookRepository.getById(id).getComments();
+    }
+
+    public void setBookPriceWithDiscount(Book book) {
+        book.setPrice(book.getPrice().subtract(
+                book.getPrice().multiply(new BigDecimal(discountService.getDiscountById(book.getDiscountGroupId()))).divide(new BigDecimal(100),
+                        RoundingMode.DOWN)));
     }
 }
